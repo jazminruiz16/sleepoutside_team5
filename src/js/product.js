@@ -9,6 +9,13 @@ function addProductToCart(product) {
   setLocalStorage('so-cart', cart);
 }
 
+// add to cart button event handler
+async function addToCartHandler(e) {
+  const id = e.currentTarget.dataset.id; // safer than e.target
+  const product = await dataSource.findProductById(id);
+  addProductToCart(product);
+}
+
 // add listener to Add to Cart button
 document
   .getElementById('addToCart')
