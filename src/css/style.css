@@ -261,3 +261,19 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Cart Footer */
+.cart-footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: right;
+}
+
+.hide {
+  display: none;
+}
+
+.cart-total {
+  font-weight: bold;
+  font-size: 1.25rem;
+}

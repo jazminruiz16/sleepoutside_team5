@@ -5,6 +5,19 @@ function renderCartContents() {
   if (!Array.isArray(cartItems)) cartItems = [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector('.product-list').innerHTML = htmlItems.join('');
+
+  const cartFooter = document.querySelector('.cart-footer');
+  if (cartItems.length > 0) {
+    cartFooter.classList.remove('hide');
+
+    let totalPrice = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+    const totalElement = document.querySelector('.cart-total');
+    if (totalElement) {
+      totalElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    }
+  } else {
+    cartFooter.classList.add('hide');
+  }
 }
 
 function cartItemTemplate(item) {
