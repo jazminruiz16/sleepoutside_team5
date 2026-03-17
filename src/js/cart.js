@@ -1,4 +1,8 @@
-import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  loadHeaderFooter,
+} from './utils.mjs';
 
 async function initCartPage() {
   await loadHeaderFooter();
@@ -6,27 +10,30 @@ async function initCartPage() {
 }
 
 function renderCartContents() {
-  let cartItems = getLocalStorage("so-cart");
+  let cartItems = getLocalStorage('so-cart');
   if (!Array.isArray(cartItems)) cartItems = [];
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  document.querySelector('.product-list').innerHTML = htmlItems.join('');
 
   setupRemoveListeners();
 
-  const cartFooter = document.querySelector(".cart-footer");
+  const cartFooter = document.querySelector('.cart-footer');
 
   if (cartItems.length > 0) {
-    cartFooter.classList.remove("hide");
+    cartFooter.classList.remove('hide');
 
-    const totalPrice = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
-    const totalElement = document.querySelector(".cart-total");
+    const totalPrice = cartItems.reduce(
+      (sum, item) => sum + item.FinalPrice,
+      0,
+    );
+    const totalElement = document.querySelector('.cart-total');
 
     if (totalElement) {
       totalElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
     }
   } else {
-    cartFooter.classList.add("hide");
+    cartFooter.classList.add('hide');
   }
 }
 
@@ -51,7 +58,7 @@ function cartItemTemplate(item) {
 }
 
 function removeCartItemFromStorage(id) {
-  let cartItems = getLocalStorage("so-cart");
+  let cartItems = getLocalStorage('so-cart');
   if (!Array.isArray(cartItems)) cartItems = [];
 
   const itemIndex = cartItems.findIndex((item) => item.Id === id);
@@ -60,15 +67,15 @@ function removeCartItemFromStorage(id) {
     cartItems.splice(itemIndex, 1);
   }
 
-  setLocalStorage("so-cart", cartItems);
+  setLocalStorage('so-cart', cartItems);
   renderCartContents();
 }
 
 function setupRemoveListeners() {
-  const removeButtons = document.querySelectorAll(".cart-card__remove");
+  const removeButtons = document.querySelectorAll('.cart-card__remove');
 
   removeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener('click', () => {
       const itemId = button.dataset.id;
       removeCartItemFromStorage(itemId);
     });

@@ -1,6 +1,6 @@
 export default class Alert {
   constructor() {
-    this.path = "/json/alerts.json";
+    this.path = '/json/alerts.json';
     this.alerts = [];
   }
 
@@ -8,7 +8,7 @@ export default class Alert {
     const response = await fetch(this.path);
 
     if (!response.ok) {
-      throw new Error("Could not load alerts");
+      throw new Error('Could not load alerts');
     }
 
     this.alerts = await response.json();
@@ -19,12 +19,12 @@ export default class Alert {
   }
 
   render() {
-    const main = document.querySelector("main");
-    const alertSection = document.createElement("section");
-    alertSection.classList.add("alert-list");
+    const main = document.querySelector('main');
+    const alertSection = document.createElement('section');
+    alertSection.classList.add('alert-list');
 
     this.alerts.forEach((alert) => {
-      const p = document.createElement("p");
+      const p = document.createElement('p');
       p.textContent = alert.message;
       p.style.backgroundColor = alert.background;
       p.style.color = alert.color;
