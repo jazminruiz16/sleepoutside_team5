@@ -12,9 +12,12 @@ export default class ProductData {
     this.path = `/json/${this.category}.json`;
   }
   getData() {
-    return fetch(this.path)
-      .then(convertToJson)
-      .then((data) => data);
+    if (!this.cachedData) {
+      this.cachedData = fetch(this.path)
+        .then(convertToJson)
+        .then((data) => data);
+    }
+    return this.cachedData;
   }
   async findProductById(id) {
     const products = await this.getData();

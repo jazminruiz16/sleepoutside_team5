@@ -19,8 +19,16 @@ export default class ProductDetails {
   addProductToCart() {
     let cart = getLocalStorage("so-cart");
     if (!Array.isArray(cart)) cart = [];
-
-    cart.push(this.product);
+    // Prevent duplicate items in the cart!! Don't redo this
+    const item = cart.filter(item => item.productId === this.product.Id);
+    if (item.length === 0) {
+      cart.push({
+        productId: this.product.Id,
+        count: 1
+      });
+    } else {
+      item[0].count++;
+    }
     setLocalStorage("so-cart", cart);
   }
 

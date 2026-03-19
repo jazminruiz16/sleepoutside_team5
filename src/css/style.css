@@ -236,6 +236,11 @@ button {
   grid-column: 3;
 }
 
+.cart-card__quantity input {
+  max-width: 50px;
+  max-height: 25px;
+}
+
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
