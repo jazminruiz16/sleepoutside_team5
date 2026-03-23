@@ -45,12 +45,11 @@ export function renderListWithTemplate(
 
 // single template
 export function renderWithTemplate(template, parentElement, data, callback) {
-  const fragment = document.createRange().createContextualFragment(template);
-  parentElement.replaceChildren(fragment);
-
+  parentElement.innerHTML = template;
   if (callback) {
     callback(data);
   }
+  
 }
 
 // fetch template file
